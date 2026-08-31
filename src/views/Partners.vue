@@ -11,15 +11,13 @@ import BackLink from '../components/BackLink.vue'
 // The partners list, grouped by country with an A–Z / Z–A toggle, exactly as
 // legacy's PartnersPage.vue.
 //
-// ── Partners that hold nothing would still be listed ────────────────────────
+// ── A partner that holds nothing is still listed ────────────────────────────
 // Legacy's partner query is a three-branch UNION and the third one — its own
 // comment calls it MWNF-384 — selects every museum *created under the
-// gallery's own project*, whether or not it holds a member item. That branch
-// cannot fire here: Amulets owns no content at all, so all 45 members are
-// borrowed and every one of its 26 museums holds at least one. The
-// zero-count handling below is therefore inert today, and is kept because it
-// is the behaviour legacy specifies rather than a fact about this export —
-// a reimport that moves an item can make it live without notice.
+// gallery's own project*, whether or not it holds a member item. Amulets owns
+// no content, so that branch cannot fire while the export stays as it is; the
+// handling below is legacy's rule rather than a fact about this export, and a
+// reimport that moves an item makes it live without notice.
 //
 // Such a partner gets a full entry — name, city, logo, "Read more" — and only
 // the "View objects" link is withheld, which is exactly what legacy does with
@@ -29,10 +27,11 @@ import BackLink from '../components/BackLink.vue'
 // a fact about the partner, so it names the reason instead.
 //
 // Legacy also printed a "Partner / Affiliate" badge from `isPartner`, a flag
-// that describes a partner's relationship to a *project*, not to this gallery,
-// and `partners.project_id` in the inventory model is the museum's creating
-// project rather than that relationship. Every Amulets museum would read as an
-// affiliate, so the badge carries no information here and is omitted.
+// that describes a partner's relationship to a *project*, not to this gallery.
+// `partners.project_id` in the inventory model is the museum's creating
+// project rather than that relationship, and since this gallery borrows all
+// its content every museum would read the same way — the badge would carry no
+// information, so it is omitted.
 const order = ref('a-z')
 
 const grouped = computed(() => {

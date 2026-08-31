@@ -19,10 +19,9 @@ const ISLAMIC_ART = 'https://islamicart.museumwnf.org'
 const BAROQUE_ART = 'https://baroqueart.museumwnf.org'
 const SHARING_HISTORY = 'https://sharinghistory.museumwnf.org'
 
-// `mwnf3.projectnames`, English row. Amulets' 45 members come from four of
-// these projects; the rest are listed so that a reimport bringing in another
-// project's object names it properly instead of surfacing a bare key on the
-// sheet.
+// `mwnf3.projectnames`, English row — the whole table rather than the projects
+// this gallery currently borrows from, since that set moves with every
+// reimport. An unlisted key would surface on the sheet as a bare key.
 const PROJECT_NAMES = {
   ISL: 'Discover Islamic Art',
   EPM: 'Explore Islamic Art Collections',
@@ -131,10 +130,13 @@ watch([description, shortDescription, showShort], () => nextTick(bindGlossaryLin
 //
 // Order and labels are the legacy sheet's, field for field
 // (DatabaseItem.vue's `objectData`). Empty values are dropped, as legacy's
-// `filterData` did. Two legacy fields have no counterpart in the inventory
-// model at all — `scriber` and `binding` — and three notice fields
-// (`notice`, `notice_b`, `notice_c`) were never imported; all are simply
-// absent rather than faked.
+// `filterData` did.
+//
+// Three legacy rows are missing here and should not be: `scriber`, `binding`
+// and the copyright block. The first two ARE carried by the package — the
+// importer writes them to `item_translations.extra` and the exporter reads
+// them back — so their absence is this field list's omission rather than a
+// gap in the model. Tracked for every site in metanull/inventory-app#1630.
 const L = (key) => tIn(lang.value, key)
 
 const fields = computed(() => {
@@ -194,10 +196,9 @@ const citation = computed(() => {
 
 const projectName = computed(() => PROJECT_NAMES[item.value?.project_key] ?? item.value?.project_key ?? '')
 
-// The four projects legacy offers a "search the related database" link for.
-// DCA is deliberately not among them — legacy has no public DCA database search
-// to point at — which on Amulets costs the link on 3 of the 45 members; the
-// other 42 (EPM, ISL, awe) all get one.
+// The projects legacy offers a "search the related database" link for. DCA is
+// deliberately not among them: legacy has no public DCA database search to
+// point at, so a DCA-sourced member gets no such link at all.
 const RELATED_DATABASE_PROJECTS = new Set(['ISL', 'EPM', 'DBA', 'BAR', 'AWE', 'awe'])
 const hasRelatedDatabase = computed(() =>
   RELATED_DATABASE_PROJECTS.has(item.value?.project_key)
@@ -572,14 +573,11 @@ function printSheet() {
         </div>
 
         <!-- Search related database.
-             Legacy gates the whole block — header included — on the item
-             coming from one of the four projects that have a public database
-             search (`DatabaseItem.vue`, `v-if="project === 'ISL' || 'EPM' ||
-             'AWE' || 'DBA'"`), and offers no such link for DCA records. On
-             Amulets that covers 42 of the 45 members (EPM, ISL, awe); the
-             three DCA ones would otherwise get a heading with nothing under
-             it, which is why the gate is on the wrapper and not on each
-             line. -->
+             The gate is on the wrapper rather than on each line because
+             legacy gates the whole block, header included, on the item's
+             project (`DatabaseItem.vue`, `v-if="project === 'ISL' || 'EPM' ||
+             'AWE' || 'DBA'"`). A member from any other project would
+             otherwise get a heading with nothing under it. -->
 
         <div v-if="hasRelatedDatabase">
           <p class="related-header">{{ tIn(lang, 'searchRelatedDatabase') }}</p>

@@ -5,10 +5,10 @@ collection with its dependent filters, a full-text database search, partner
 profiles and their holdings, country timelines and the item sheets themselves —
 built from the published dataset.
 
-Unlike most MWNF galleries, Amulets owns no content of its own: all 45 objects
-are borrowed from other MWNF projects (Explore Islamic Art Collections,
-Discover Islamic Art, Sharing History and Discover Carpet Art), which is why
-every item sheet names a source project.
+Unlike most MWNF galleries, Amulets owns no content of its own: every object is
+borrowed from another MWNF project, which is why each item sheet names a source
+project and why the "search the related database" link is absent on members
+from projects with no public database of their own.
 
 A website is a light, static Vue 3 front-end for one published dataset. It
 combines three `@metanull` packages from GitHub Packages:

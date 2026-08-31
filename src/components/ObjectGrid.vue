@@ -14,11 +14,10 @@ defineProps({
 
 const hovered = ref(-1)
 
-// Legacy read these off the API, which read `mwnf3.projectnames`. Amulets draws
-// its 45 members from four of these projects, but the map covers the whole
-// table's English row for the keys a gallery can meet — so a reimport that
-// brings in another project's object still names it — and falls back to the
-// key itself for anything unlisted.
+// Legacy read these off the API, which read `mwnf3.projectnames`. The map is
+// the whole table's English row rather than the projects this gallery happens
+// to borrow from, because that set is a property of the export and moves with
+// every reimport. Unlisted keys fall back to the key itself.
 const PROJECT_NAMES = {
   ISL: 'Discover Islamic Art',
   EPM: 'Explore Islamic Art Collections',

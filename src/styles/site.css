@@ -109,11 +109,10 @@ a { color: inherit; }
 }
 
 /* Source-project colour chips, mirroring legacy's backgroundColor().
-   Amulets' 45 members come from four projects — EPM (24), ISL (13), awe (5)
-   and DCA (3) — but the whole set of keys a gallery can meet is listed, so a
-   reimport that brings in a member from another project still gets its legacy
-   colour instead of falling through to an unstyled chip. Legacy coloured any
-   exhibition-sourced entry with $exhibitions-color. */
+   The table is the platform's, not this gallery's: which projects a gallery
+   draws members from is a property of the export and changes with every
+   reimport, so every key a gallery can meet is listed rather than only the
+   ones currently in use. An unlisted key would render an unstyled chip. */
 .project-chip { color: #fff; padding: 1px 8px; font-size: 12px; display: inline-block; }
 .project-ISL, .project-EPM { background: var(--dia-yellow); color: #222; }
 .project-DBA, .project-BAR { background: var(--dba-blue); }
