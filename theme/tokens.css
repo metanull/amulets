@@ -110,6 +110,68 @@
   --mwnf-banner-section-max-height: 150px;
   --mwnf-banner-section-title-size: 190%;
 
+  /* ---------- Content: the record page ---------- */
+  /* The sheet as the legacy gallery set it: bold terracotta labels over plain
+     values, no cell borders, the photo gallery on the ivory ground. */
+  --mwnf-sheet-text-size: 0.9375rem;
+  --mwnf-sheet-label-size: 0.9375rem;
+  --mwnf-sheet-label-weight: 700;
+  --mwnf-sheet-label-color: #8e2e15;
+  --mwnf-sheet-gap: 0.75rem;
+  --mwnf-sheet-toggle-color: #8e2e15;
+  --mwnf-sheet-term-color: #b53615;
+  --mwnf-sheet-term-underline: #b53615;
+  --mwnf-sheet-section-border: 1px solid #eb9681;
+  --mwnf-sheet-heading-size: 1rem;
+  --mwnf-sheet-heading-color: #8e2e15;
+  --mwnf-credits-border: 1px solid #eb9681;
+  --mwnf-credits-size: 0.875rem;
+  --mwnf-credits-color: #1a1a1a;
+  --mwnf-languages-gap: 0.125rem;
+  --mwnf-languages-button-border: 1px solid #d46e59;
+  --mwnf-languages-button-text: #8e2e15;
+  --mwnf-languages-button-size: 0.8125rem;
+  --mwnf-languages-active-background: #b53615;
+  --mwnf-languages-active-text: #ffffff;
+  --mwnf-media-background: #ffe7e0;
+  --mwnf-media-thumb-active-border: 2px solid #b53615;
+  --mwnf-media-caption-color: #555555;
+  --mwnf-popover-border: 2px solid #b53615;
+  --mwnf-popover-title-background: #8e2e15;
+  --mwnf-grid-card-background: rgba(142, 46, 21, 0.93);
+
+  /* ---------- Content: the lists ---------- */
+  /* The tile grid, the "filter further by" column, the summary line and the
+     page links as the legacy gallery drew them: white controls with the grey
+     border on the ivory panel, the active page in the dark terracotta. */
+  --mwnf-grid-columns: 3;
+  --mwnf-grid-gap: 4px;
+  --mwnf-grid-tile-background: #ffffff;
+  --mwnf-grid-card-text: #ffffff;
+  --mwnf-filter-padding: 14px;
+  --mwnf-filter-border: none;
+  --mwnf-filter-background: #ffe7e0;
+  --mwnf-filter-gap: 10px;
+  --mwnf-filter-title-size: 1rem;
+  --mwnf-filter-title-color: #1a1a1a;
+  --mwnf-filter-control-border: 1px solid #999999;
+  --mwnf-filter-control-background: #ffffff;
+  --mwnf-filter-control-padding: 5px;
+  --mwnf-filter-reset-background: #b53615;
+  --mwnf-filter-reset-text: #ffffff;
+  --mwnf-summary-size: 0.9375rem;
+  --mwnf-summary-color: #1a1a1a;
+  --mwnf-summary-value-color: #1a1a1a;
+  --mwnf-summary-border: none;
+  --mwnf-summary-padding: 0;
+  --mwnf-pagination-size: 0.8125rem;
+  --mwnf-pagination-button-border: 1px solid #d46e59;
+  --mwnf-pagination-button-background: #ffffff;
+  --mwnf-pagination-button-text: #8e2e15;
+  --mwnf-pagination-button-hover-background: #ffe7e0;
+  --mwnf-pagination-active-background: #b53615;
+  --mwnf-pagination-active-text: #ffffff;
+
   /* ---------- Navigation: the menu button and the standing notice ---------- */
   --mwnf-nav-toggle-background: #8e2e15;
   --mwnf-nav-toggle-color: #ffffff;
