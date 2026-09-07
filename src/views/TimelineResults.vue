@@ -52,15 +52,16 @@ function goToResults() {
   })
 }
 
-// Member items in the same country and period — the condition legacy used to
-// decide whether to offer the gallery view.
+// Member items in the same country (when one is chosen) and period — the
+// condition legacy used to decide whether to offer the gallery view. Legacy
+// queried without a country restriction for "all", the same open country the
+// gallery page itself treats as every country, rather than hiding the link.
 const galleryItems = computed(() => {
   const countryId = countryIdForCode(String(route.query.c ?? 'all'))
-  if (!countryId) return []
   const from = route.query.start ? Number(route.query.start) : null
   const to = route.query.end ? Number(route.query.end) : null
   return items.value.filter(i => {
-    if (i.country_id !== countryId) return false
+    if (countryId && i.country_id !== countryId) return false
     const itemStart = i.start_date
     const itemEnd = i.end_date ?? i.start_date
     if (!Number.isFinite(itemStart)) return false
@@ -97,7 +98,7 @@ const galleryItems = computed(() => {
         </label>
         <label>{{ $t('catalogue.facet.country') }}
           <select class="legacy-select" v-model="country">
-            <option v-for="c in timelineCountries" :key="c[0]" :value="c[0]">{{ c[1] }}</option>
+            <option v-for="c in timelineCountries" :key="c[0]" :value="c[0]">{{ c[1] ?? $t('gallery.timeline.allCountries') }}</option>
           </select>
         </label>
         <button class="legacy-button" @click="goToResults()">{{ $t('core.action.go') }}</button>

@@ -83,6 +83,10 @@ function nameFor(timeline) {
  * One entry per COUNTRY, not per timeline row: a country served by BOTH
  * `mwnf3` and `sharing_history` has two rows, and would otherwise appear twice
  * in every country picker on the site.
+ *
+ * The "all" row carries a null label rather than a text: this composable is
+ * not where a display language is chosen, so the templates that render the
+ * picker read it through `gallery.timeline.allCountries` themselves.
  */
 export const timelineCountries = computed(() => {
   const byCountry = new Map()
@@ -91,7 +95,7 @@ export const timelineCountries = computed(() => {
     byCountry.set(timeline.country_id, [legacyCodeOf(timeline), nameFor(timeline)])
   }
   const rows = [...byCountry.values()].sort((a, b) => a[1].localeCompare(b[1]))
-  return [['all', 'All Countries'], ...rows]
+  return [['all', null], ...rows]
 })
 
 /** Display name for an event's country. */
