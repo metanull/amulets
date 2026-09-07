@@ -1,5 +1,5 @@
 <script setup>
-// The Amulets page chrome: `PageShell` from @metanull/viewer-layout, filled
+// The Amulets and Talismans page chrome: `PageShell` from @metanull/viewer-layout, filled
 // from props. The only things this component adds are the values that depend
 // on the route or the language — which banner shows, what the section is
 // called, what the switcher offers — and the MWNF mark in the header.
@@ -8,7 +8,7 @@ import { useI18n, useSection, useSiteConfig } from '@metanull/viewer-core'
 import { PageShell } from '@metanull/viewer-layout'
 import { useRouter } from 'vue-router'
 import {
-  gallery, chromeImage, itemById, itemLabel, partnerLabel, countryLabel, tr, defaultLang, manifest,
+  gallery, chromeImage, itemById, labelOf, tr, defaultLang, manifest,
 } from './composables/useGalleryData.js'
 
 // `language`, `languages` and `update:language` are the shell contract of
@@ -75,10 +75,10 @@ const bannerCaption = computed(() => {
   if (!item) return ''
   const sheet = tr('items', item.id, defaultLang)
   return {
-    name: itemLabel(item),
-    partner: partnerLabel(item.partner_id),
+    name: labelOf('items', item.id),
+    partner: labelOf('partners', item.partner_id),
     location: sheet.location ?? '',
-    country: countryLabel(item.country_id),
+    country: labelOf('countries', item.country_id),
   }
 })
 
