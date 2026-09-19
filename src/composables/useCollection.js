@@ -131,6 +131,11 @@ export function haystack(item, text) {
 /**
  * A record as viewer-layout's grid contract: the thumbnail, the name, the
  * lines legacy's hover card carried (date, holder, place, source project).
+ *
+ * TODO(#1727): still reads `item.project_key` through the deprecated
+ * `projectName()` rather than `manifest.projects` — see the TODO in
+ * `../views/ItemSheet.vue` for why (amulets items carry no `project_id`,
+ * unlike carpets').
  */
 export function tile(item, t) {
   const text = tr('items', item.id, defaultLang)

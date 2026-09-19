@@ -1,6 +1,19 @@
 <script setup>
 import { computed, ref, watch } from 'vue'
 import { RouterLink } from 'vue-router'
+// TODO(#1727): this file still reads every project literal off `record.project_key`
+// (`projectName`/`projectFamily`, `RELATED_DATABASE_PROJECTS`, the `project_key === 'X'`
+// branches below) instead of `manifest.projects` via `useProjects()`, unlike carpets'
+// ItemSheet.vue (carpets/amulets are normally a byte-identical pair). This is not an
+// oversight: `npm pack @museumwnf/amulets-data` (checked 2026-09-19, amulets-data 1.0.13)
+// shows every one of this gallery's 45 items carries `project_key` but NO `project_id`
+// field at all — unlike carpets-data 1.0.9, where every item carries both. Migrating this
+// file the way carpets' was migrated would make every `useProjects()` lookup resolve
+// `null` (no `record.project_id` to look up), silently blanking the source-database line,
+// the chip and its colour, and hiding the related-database/artistic-introduction/EIAC-notice
+// blocks for every item — a real regression on data that works fine today. Platform gap:
+// the amulets exporter needs to emit `project_id` on items, matching carpets' exporter,
+// before this file can migrate. Left untouched pending that fix.
 import { projectFamily, projectName, useI18n, useSiteConfig } from '@museumwnf/viewer-core'
 import { BackLink, DynastyList, GlossaryTool, RecordLanguages, RelatedRecords, SheetSection } from '@museumwnf/viewer-layout/content'
 import { RecordView } from '@museumwnf/viewer-layout/views'
